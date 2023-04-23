@@ -1,9 +1,6 @@
- int f(int arr[],int ind,int n,int sum,int prev_ele,vector<vector<int>>& dp)
+    int f(int arr[],int ind,int n,int sum,int prev_ele)
     {
                 
-        if(dp[ind][sum]!=-1)
-        return dp[ind][sum];
-        
         if(ind==n)
         return sum;
         
@@ -16,7 +13,7 @@
         int pick=INT_MIN,notpick=INT_MIN;
         
         if(prev_ele<arr[ind])
-       pick= f(arr,ind+1,n,sum,arr[ind],dp);
+       pick= f(arr,ind+1,n,sum,arr[ind]);
        
        int summ;
        if(prev_ele<arr[ind]){
@@ -27,16 +24,15 @@
        else{
            summ=sum;
        }
-        notpick=f(arr,ind+1,n,summ,prev_ele,dp);
+        notpick=f(arr,ind+1,n,summ,prev_ele);
        
        
-       return dp[ind][sum]=max(pick,notpick);
+       return max(pick,notpick);
     }
 	public:
 	int maxSumIS(int arr[], int n)  
 	{  
 	    // Your code goes here
-	    vector<vector<int>>dp(n,vector<int>(10005,-1));
-	    return f(arr,0,n,0,INT_MIN,dp);
+	    return f(arr,0,n,0,INT_MIN);
 	    
 	}  
