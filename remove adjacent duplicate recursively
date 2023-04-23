@@ -1,0 +1,80 @@
+  string f(string s){
+        int n=s.length();
+        
+        if(n==0)
+        return "";
+        
+        if(n==1)
+        return s;
+        
+        if(n==2 && s[0]==s[1])
+        return "";
+        
+        if(n==2 && s[0]!=s[1])
+        return s;
+        
+        bool elim[n];
+        bool check=false;
+        
+        for(int i=0;i<n-1;i++){
+            
+            if(s[i]==s[i+1]){
+                
+             elim[i]=false;
+             check=true;
+               
+            }
+            else{
+                if(check){
+                    elim[i]=false;
+                    check=false;
+                }
+                else{
+                    elim[i]=true;
+                }
+            }
+            
+        }
+        if(s[n-1]==s[n-2])
+        elim[n-1]=false;
+        
+        else
+        elim[n-1]=true;
+        
+        string ans="";
+        
+        for(int i=0;i<n;i++)
+        {
+            if(elim[i])
+            ans.push_back(s[i]);
+        }
+        bool checkk=true;
+        
+        if(ans.length()==0)
+        return "";
+        
+        if(ans.length()==1)
+        return ans;
+        
+        if(ans.length()==2 && ans[0]==ans[1])
+        return "";
+        
+        if(ans.length()==3 && ans[0]!=ans[1])
+        return ans;
+        
+        
+        for(int i=0;i<ans.length()-1;i++)
+        {
+            if(ans[i]==ans[i+1])
+            {
+                checkk=false;
+                break;
+            }
+        }
+        
+        if(!checkk)
+        return f(ans);
+        
+        else
+        return ans;
+    }
